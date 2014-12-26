@@ -1,0 +1,49 @@
+{\rtf1\ansi\ansicpg936\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red184\green14\blue61;\red247\green238\blue241;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10380\viewh7200\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\fs28 \cf2 \expnd0\expndtw0\kerning0
+A peak element is an element that is greater than its neighbors.\
+Given an input array where 
+\f1\fs26 \cf3 \cb4 \expnd0\expndtw0\kerning0
+num[i] \uc0\u8800  num[i+1]
+\f0\fs28 \cf2 \cb1 \expnd0\expndtw0\kerning0
+, find a peak element and return its index.\
+The array may contain multiple peaks, in that case return the index to any one of the peaks is fine.\
+You may imagine that 
+\f1\fs26 \cf3 \cb4 \expnd0\expndtw0\kerning0
+num[-1] = num[n] = -\uc0\u8734 
+\f0\fs28 \cf2 \cb1 \expnd0\expndtw0\kerning0
+.\
+For example, in array 
+\f1\fs26 \cf3 \cb4 \expnd0\expndtw0\kerning0
+[1, 2, 3, 1]
+\f0\fs28 \cf2 \cb1 \expnd0\expndtw0\kerning0
+, 3 is a peak element and your function should return the index number 2.\
+\
+public class Solution \{\
+    public int findPeakElement(int[] num) \{\
+        if(num.length==0) return 0;\
+        int low=0;\
+        int high=num.length-1;\
+        \
+        while(low<high)\{\
+            int mid= (low+high+1)/2;\
+            \
+            if(num[mid]>num[mid-1])\{\
+                low=mid;\
+            \}else \{\
+                high=mid-1;\
+            \}\
+            \
+            \
+        \}\
+        \
+       return low; \
+        \
+    \}\
+\}}
