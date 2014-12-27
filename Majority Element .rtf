@@ -1,59 +1,0 @@
-{\rtf1\ansi\ansicpg936\cocoartf1265\cocoasubrtf210
-{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red184\green14\blue61;\red247\green238\blue241;
-}
-\paperw11900\paperh16840\margl1440\margr1440\vieww10380\viewh7200\viewkind0
-\deftab720
-\pard\pardeftab720
-
-\f0\fs28 \cf2 \expnd0\expndtw0\kerning0
-Given an array of size 
-\i \expnd0\expndtw0\kerning0
-n
-\i0 \expnd0\expndtw0\kerning0
-, find the majority element. The majority element is the element that appears more than 
-\f1\fs26 \cf3 \cb4 \expnd0\expndtw0\kerning0
-\uc0\u8970  n/2 \u8971 
-\f0\fs28 \cf2 \cb1 \expnd0\expndtw0\kerning0
- times.\
-You may assume that the array is non-empty and the majority element always exist in the array.\
-\
-\
-public class Solution \{\
-    public int majorityElement(int[] num) \{\
-      int r=0;\
-      int l=num.length-1;\
-      int result[] = new int[1];\
-      DivideandConquer(num,r,l, result);\
-        return result[0];\
-    \}\
- \
-      \
-      public void DivideandConquer(int[] num, int r, int l, int[] result)\{\
-       \
-         if(r>=l)\{\
-             result[0]=num[l];\
-             return ;\
-             \
-         \}\
-         \
-         int m= (r+l)/2;\
-         int count=0;\
-         for(int i=0; i<num.length; i++)\{\
-             if(num[i]==num[m]) count++;\
-             \}\
-         \
-         if(count>num.length/2)\{\
-             result[0]=num[m];\
-             return ;\
-             \
-         \} \
-          \
-         DivideandConquer(num,r,m-1,result);\
-         DivideandConquer(num,m+1,l,result);\
-          \
-          \
-          \
-          \
-      \}\
-    \}}
