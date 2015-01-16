@@ -1,0 +1,49 @@
+Construct Binary Tree from Inorder and Postorder Traversal Total Accepted: 22776 Total Submissions: 85517 My Submissions Question Solution 
+Given inorder and postorder traversal of a tree, construct the binary tree.
+
+Note:
+You may assume that duplicates do not exist in the tree.
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+ // Inorder : left, parent, right
+ // postorder: left, right, parent
+ // 假设树的inorder 是12453768，postorder 是42513867
+ // root is 7.  left: inorder: 12453  postorder:42513   right: inorder: 68  postorder: 86.  then do recursion 
+ 
+public class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if(inorder==null || postorder==null) return null;
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for(int i=0; i<inorder.length-1; i++){
+            map.put(inorder[i],i);
+        }
+        
+        return rec(inorder, 0, inorder.length-1, postorder, 0, postorder.length-1,map);
+        }
+        
+         
+        private TreeNode rec(int[] inorder, int instart, int inend, int[] postorder, int poststart, int postend, HashMap<Integer, Integer> map){
+            
+            if(instart>inend || poststart>postend) return null;
+            
+            TreeNode root = new TreeNode(postorder[postend]);
+            
+            int index= map.get(root.val);
+            
+            root.left= rec(inorder, instart,index-1, postorder,poststart,poststart-instart+index-1, map);
+            root.right=rec(inorder, index+1, inend, postorder, postend-(inend-index), postend-1, map);
+            
+        return root;
+    }
+}
+    
+
