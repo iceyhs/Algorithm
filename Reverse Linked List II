@@ -1,0 +1,42 @@
+Reverse a linked list from position m to n. Do it in-place and in one-pass.
+
+For example:
+Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+
+return 1->4->3->2->5->NULL.
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next=head;
+        ListNode PreM=dummy, Prev=null, Curr=null;
+        for(int i=1; i<=n; i++){
+            if(i<m) PreM=PreM.next;
+            else if(i==m) {
+                Prev=PreM.next;
+                Curr=Prev.next;
+            }else{
+               Prev.next=Curr.next;
+               Curr.next=PreM.next;
+               PreM.next=Curr;
+               Curr=Prev.next;
+            }
+            
+            
+        }
+        
+       return dummy.next; 
+    }
+}
