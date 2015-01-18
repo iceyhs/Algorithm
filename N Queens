@@ -1,0 +1,75 @@
+The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+
+
+
+Given an integer n, return all distinct solutions to the n-queens puzzle.
+
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+
+For example,
+There exist two distinct solutions to the 4-queens puzzle:
+
+[
+ [".Q..",  // Solution 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+ ["..Q.",  // Solution 2
+  "Q...",
+  "...Q",
+  ".Q.."]
+]
+
+
+public class Solution {
+    public List<String[]> solveNQueens(int n) {
+        List<String[]> result = new ArrayList<String[]>();
+        int[] col = new int[n];
+        dfs(n,0,result,col);
+        return result;
+    }
+    
+     private void dfs(int n, int currow, List<String[]> result, int[] col){
+        if(currow==n){
+            printBoard(result,col,n);
+            return;
+        }
+         
+       else{
+       for(int i=0; i<n; i++) // n lie
+       {   col[currow]=i;  // 0 hang 0 lie
+           if(isValid(col,currow)){
+               dfs(n, currow+1, result, col); // search the next row
+           }
+       }
+    }
+} 
+
+      private boolean isValid(int[] col,int currow){
+         for(int i=0; i<currow; i++){
+             if (col[currow]==col[i] || Math.abs(currow-i)==Math.abs(col[currow]-col[i]))
+               return false;
+         } 
+          
+          return true;
+      } 
+     
+     private void printBoard(List<String[]> result, int[] col, int n){
+        String[] temp = new String[n];
+         for(int i=0; i<n; i++)  // n hang 
+        {   String row = new String(); 
+            for(int j=0; j<n; j++){ // lie
+                if(col[i]==j) row=row+"Q";
+                else row=row+".";
+            }
+         temp[i]=row;
+         
+        }
+        result.add(temp);
+     }
+     
+     
+     
+    
+}
