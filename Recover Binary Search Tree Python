@@ -1,0 +1,45 @@
+ Two elements of a binary search tree (BST) are swapped by mistake.
+
+Recover the tree without changing its structure. 
+
+# Definition for a  binary tree node
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    # @param root, a tree node
+    # @return a tree node
+    prev = None
+    p1 = None
+    p2 = None
+    
+    def recoverTree(self, root):
+        self.prev = None
+        self.p1 = None
+        self.p2 = None
+        self.inOrder(root)
+        tmp = self.p1.val
+        self.p1.val = self.p2.val
+        self.p2.val = tmp
+        return root
+    
+    def inOrder(self, root):
+        if root == None:
+            return
+        else:
+            self.inOrder(root.left)
+            if self.prev == None:
+                self.prev = root
+            else:
+                if root.val <= self.prev.val:
+                    if self.p1 == None:
+                        self.p1 = self.prev
+                    self.p2 = root
+                self.prev = root
+            self.inOrder(root.right)
+     
+   
+        
