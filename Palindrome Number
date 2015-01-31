@@ -1,0 +1,16 @@
+Determine whether an integer is a palindrome. Do this without extra space.
+
+
+class Solution:
+# @return a boolean
+    def isPalindrome(self, x):
+        if x < 0:
+            return False 
+        a, b = x, 0
+        while a:
+            temp=a%10
+            b=b*10+temp
+            a=a/10
+
+        return b == x
+        
