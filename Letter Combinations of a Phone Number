@@ -28,7 +28,7 @@ public class Solution {
             return;
         }
         else{
-          for(int i=0; i< dic[digits.charAt(deep)-'0'].length(); i++) 
+          for(int i=0; i< dic[digits.charAt(deep)-'0'].length(); i++) //convert letter to integer if not - '0'. the result is ASCII value.
            {  temp.append(dic[digits.charAt(deep)-'0'].charAt(i));
              rec(result, temp,digits,deep+1, dic);
              temp.deleteCharAt(temp.length()-1);
