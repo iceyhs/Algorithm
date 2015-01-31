@@ -1,0 +1,28 @@
+ Given an array of strings, return all groups of strings that are anagrams.
+Note: All inputs will be in lower-case.
+
+
+class Solution:
+    # @param strs, a list of strings
+    # @return a list of strings
+    def anagrams(self, strs):
+    #The expression a = [] assigns a new, empty list object to a. When you do a = {}, you are assigning a new, empty dictionary object.
+        hash= {} #dic
+        for index, val in enumerate(strs):
+            Sorted=self.sort(val)
+            if Sorted in hash:
+                hash[Sorted].append(val)  #The append() method adds a single item to the end of the list [1, 2, 3, [4, 5], 'abc']
+            else:
+                hash[Sorted]=[val]
+            
+        
+        ret=[]  #list
+        
+        for i in hash:
+            if len(hash[i])>1:
+                ret.extend(hash[i]) #extend appends a list of elements.  [1, 2, 3, 4, 5, 'a', 'b', 'c']
+        return ret
+            
+    def sort(self,s):
+        s=sorted(s)
+        return "".join(s)
