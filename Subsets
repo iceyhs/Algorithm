@@ -42,3 +42,27 @@ public class Solution {
 }
 
 //List list.size(); Arrays.sort;
+
+
+Python :
+class Solution:
+    # @param S, a list of integer
+    # @return a list of lists of integer
+    def subsets(self, S):
+        S.sort()
+        temp=[]
+        self.result=[[]]
+        self.dfs(S,temp,0)
+        return self.result
+    
+    def dfs(self,S,temp,pos):
+        i=pos
+        while i < len(S):
+            
+       # for i in range(pos,len(S)):
+            temp.append(S[i])
+            self.result.append(list(temp))
+            self.dfs(S,temp,i+1)
+            temp.pop()
+            i+=1
+
