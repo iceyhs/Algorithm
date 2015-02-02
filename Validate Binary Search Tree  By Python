@@ -1,0 +1,35 @@
+Given a binary tree, determine if it is a valid binary search tree (BST).
+
+Assume a BST is defined as follows:
+
+The left subtree of a node contains only nodes with keys less than the node's key.
+The right subtree of a node contains only nodes with keys greater than the node's key.
+Both the left and right subtrees must also be binary search trees.
+confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on OJ.
+
+
+# Definition for a  binary tree node
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    # @param root, a tree node
+    # @return a boolean
+    Pre=None
+    def isValidBST(self, root):
+        if root is None:
+            return True
+        
+        res=self.isValidBST(root.left)
+        if self.Pre is None:
+            self.Pre=root
+        else:
+             res=res and (root.val> self.Pre.val)
+             self.Pre=root
+        
+        res=res and self.isValidBST(root.right)
+        return res
+        
