@@ -1,0 +1,22 @@
+Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+
+class Solution:
+    # @return a boolean
+    def isValid(self, s):
+        dic={'(':')','{':'}','[':']'}
+        stack=[]
+        for c in s:
+            if dic.get(c,None):
+                stack.append(c)
+            elif len(stack)==0 or dic[stack[-1]]!=c:
+                return False
+            else:
+                stack.pop()
+        return True if len(stack)==0 else False 
+        
+        
+        
+        
+        
