@@ -66,3 +66,10 @@ class Solution:
             temp.pop()
             i+=1
 
+//     def dfs(self,S,temp,pos):
+        for i in range(pos,len(S)):
+            temp.append(S[i])
+            self.result.append(list(temp))
+            self.dfs(S,temp,i+1)
+            temp.pop()
+            i+=1
