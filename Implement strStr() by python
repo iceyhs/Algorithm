@@ -1,0 +1,40 @@
+mplement strStr().
+
+Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+
+class Solution:
+    # @param haystack, a string
+    # @param needle, a string
+    # @return an integer
+    # haystack='aabbaa'; needle='bb'。
+    def strStr(self, haystack, needle):
+        if len(haystack)<len(needle):
+            return -1
+        i=0
+        while i<len(haystack)-len(needle)+1:
+            k=i
+            j=0
+            while j<len(needle):
+                if haystack[k]==needle[j]:
+                    j+=1
+                    k+=1
+                else:
+                    break
+                
+            if j==len(needle):
+                break
+            else:
+                i+=1
+        
+        if i==len(haystack)-len(needle)+1:
+            return -1
+        else:
+            return i
+                
+                
+           
+                    
+            
+            
+
