@@ -1,0 +1,38 @@
+Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
+
+class Solution:
+    # @return a string
+    def longestPalindrome(self, s):
+        result=""
+        if len(s)==0:
+            return result
+        Maxlen=0
+        
+        for i in range(2*len(s)-1):
+            left=i/2
+            right=i/2
+            if i%2==1:
+                right+=1
+            temp=self.ispalindrom(s,left,right)
+            
+            if Maxlen<len(temp):
+                Maxlen=len(temp)
+                result=temp
+            i+=1
+            
+        return result
+        
+        
+    def ispalindrom(self,s,left,right):
+        
+        while left>=0 and right<len(s) and s[left]==s[right]:
+            left-=1
+            right+=1
+        
+            
+        return s[left+1:right]
+        
+        
+           
+            
+        
