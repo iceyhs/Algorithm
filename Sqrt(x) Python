@@ -1,0 +1,26 @@
+Implement int sqrt(int x).
+
+Compute and return the square root of x.
+
+
+# Newton's Method  x2=n
+# xi+1=xi - f(xi) / f'(xi)
+# xi+1=xi - (xi2 - n) / (2xi) = xi - xi / 2 + n / (2xi) = xi / 2 + n / 2xi = (xi + n/xi) / 2。
+
+class Solution:
+    # @param x, an integer
+    # @return an integer
+    def sqrt(self, x):
+        
+        if x is 0:
+            return 0
+            
+        x1=0.0
+        x2=1.0
+        while x2!=x1:
+            x1=x2
+            x2=(x1+x/x1)/2
+        
+        return int(x2)
+        
+        
