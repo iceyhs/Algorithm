@@ -1,0 +1,34 @@
+Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+
+For example:
+Given "25525511135",
+
+return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
+
+class Solution:
+    # @param s, a string
+    # @return a list of strings
+    def restoreIpAddresses(self, s):
+        res=[]
+        if len(s)<4 or len(s)>12:
+            return res
+        self.dfs(s,"",0,res)
+        return res
+        
+    def dfs(self,s,tmp,count,res):
+        if count==3 and self.isvalid(s):
+            res.append(tmp+s)
+            return
+        i=1
+        while i<4 and i<len(s):
+            if self.isvalid(s[0:i]):
+                self.dfs(s[i:],tmp+s[0:i]+'.',count+1,res)
+            i+=1
+    
+    def isvalid(self,s):
+        return int(s)<=255 and int(s)>0
+        if s[0]=='0' and s!='0':
+            return False
+            
+        
+        
