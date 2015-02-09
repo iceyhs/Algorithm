@@ -1,0 +1,47 @@
+ Given an unsorted integer array, find the first missing positive integer.
+
+For example,
+Given [1,2,0] return 3,
+and [3,4,-1,1] return 2.
+
+Your algorithm should run in O(n) time and uses constant space. 
+
+
+/*
+space complexity O(n)
+先遍历一遍数组A，找到在[1,a.length]范围内最大的数，比如说该数字是x，则开辟x + 1个空间copy
+
+然后第二遍扫描数组A，将[1~x]的数字都丢到新数组的下标为其本身的槽内。例如1，就丢在copy[1]中，x就丢在copy[x]中。
+
+扫描copy数组，遇到第一个空槽，则返回槽的索引，如果没有遇到空槽，则返回x + 1。
+
+使用空间均值在n / 2，最坏达到O(n)。
+
+constant space: using swap()
+*/
+
+
+
+public class Solution {
+    public int firstMissingPositive(int[] A) {
+        int [] a=A;
+       if(a == null || a.length == 0){  
+            return 1;  
+        }  
+        for(int i = 0; i < a.length;){  
+            if(a[i] <= a.length && a[i] > 0 && a[i] != i + 1 && a[i] != a[a[i] - 1]){  
+                int tem = a[a[i] - 1];  
+                a[a[i] - 1] = a[i];  
+                a[i] = tem;  
+            }else{  
+                i++;  
+            }  
+        }  
+        for(int i = 0 ; i < a.length; i++){  
+            if(a[i] != i + 1){  
+                return i + 1;  
+            }  
+        }  
+        return a.length + 1;  
+    }  
+}
