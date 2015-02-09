@@ -1,0 +1,63 @@
+Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+ 
+ 
+ /*
+ Recursive version: We have T(n) = 2T(n/2) + kn. So the complexity is O(kn logn). The depth of the recursive function is O(log n).
+ 
+ */
+
+	
+public class Solution {
+    public ListNode mergeKLists(List<ListNode> lists) {
+        if (lists.size() == 0)
+            return null;
+        return mergeKLists(lists, 0, lists.size() - 1);
+    }
+    
+    public ListNode mergeKLists(List<ListNode> lists, int left, int right) {
+        if (left < right) {
+            int mid = left+(right-left) / 2;
+            return merge(mergeKLists(lists, left, mid), mergeKLists(lists, mid + 1, right));
+        }
+        return lists.get(left);
+    }
+    
+    public ListNode merge(ListNode m, ListNode n) {
+        ListNode head = new ListNode(0);
+        ListNode p = head;
+        while (m != null && n != null) {
+            if (m.val < n.val) {
+                p.next = m;
+                p = p.next;
+                m = m.next;
+            } else {
+                p.next = n;
+                p = p.next;
+                n = n.next;
+            }
+        }
+        while (m != null){
+            p.next = m;
+            m=m.next;
+            p=p.next;
+        }
+        while (n!=null){
+            p.next = n;
+            n=n.next;
+            p=p.next;
+        }
+        return head.next;
+    }
+}
