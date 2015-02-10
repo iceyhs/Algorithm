@@ -38,6 +38,7 @@ public class CountrySortByIdComparator implements Comparator<Country>{
 	        return (country1.getCountryId() < country2.getCountryId() ) ? -1: (country1.getCountryId() > country2.getCountryId() ) ? 1:0 ;
 	    }
 	}
+	Collections.sort(List,Comparator)
 	
 	public class Country implements Comparable{
 	       @Override
@@ -45,6 +46,7 @@ public class CountrySortByIdComparator implements Comparator<Country>{
 	        Country country=(Country) arg0;
 	        return (this.countryId < country.countryId ) ? -1: (this.countryId > country.countryId ) ? 1:0 ;
 	}}
+	Collections.sort(List)
 	
  */
  
