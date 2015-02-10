@@ -1,0 +1,76 @@
+Given a collection of intervals, merge all overlapping intervals.
+
+For example,
+Given [1,3],[2,6],[8,10],[15,18],
+return [1,6],[8,10],[15,18]. 
+
+
+/**
+ * Definition for an interval.
+ * public class Interval {
+ *     int start;
+ *     int end;
+ *     Interval() { start = 0; end = 0; }
+ *     Interval(int s, int e) { start = s; end = e; }
+ * }
+ */
+ 
+/*
+ * Use this method Collections.sort(List,Comparator) . Implement a Comparator and pass it to Collections.sort().
+
+ The compareTo() method is hard to explain, in integer sorting, just remember
+
+    this.quantity – compareQuantity is ascending order.
+    compareQuantity – this.quantity is descending order.
+
+            //ascending order
+	      return fruitName1.compareTo(fruitName2);
+ 
+	      //descending order
+	      return fruitName2.compareTo(fruitName1);
+ */
+ 
+
+ 
+ 
+public class Solution {
+    public List<Interval> merge(List<Interval> intervals) {
+        int len=intervals.size();
+        if(len==0||len==1) return intervals;
+        ArrayList<Interval> result = new ArrayList<Interval>();
+        
+        Collections.sort(intervals,new IntervalComparator());
+        
+        Interval temp = intervals.get(0);
+        
+        for (int i=1; i<len; i++){
+            Interval it= intervals.get(i);
+            
+            if(temp.end>=it.start){ //mergeable
+                int left=Math.min(temp.start,it.start);
+                int right = Math.max(temp.end, it.end);
+                temp=new Interval(left, right);
+                
+            }
+            else{
+                result.add(temp);
+                temp=intervals.get(i);
+            }
+            
+        }
+        result.add(temp);
+        return result;
+        
+    }
+}
+
+
+class IntervalComparator implements Comparator<Interval>{
+    @Override
+    public int compare(Interval a, Interval b){
+        return a.start-b.start;  //ascending order
+    }
+}
+
+
+
