@@ -1,0 +1,33 @@
+Given two numbers represented as strings, return multiplication of the numbers as a string.
+
+Note: The numbers can be arbitrarily large and are non-negative.
+
+
+public class Solution {
+    public String multiply(String num1, String num2) {
+        int size= num1.length()+num2.length();
+        int[]  sum = new int[size];
+        
+        for (int i =0; i< num1.length(); i++){
+            for(int j=0; j<num2.length();j++){
+                sum[sum.length-2-i-j]+=(num1.charAt(i)-'0')*(num2.charAt(j)-'0');
+            }
+        }
+        
+        for(int i=0; i<sum.length-1;i++){
+            int carry=sum[i]/10;
+            sum[i]=sum[i]%10;
+            sum[i+1]+=carry;
+        }
+        
+        int len=sum.length-1;
+        while(sum[len]==0&&len>0) len--;
+        StringBuilder sb=new StringBuilder();
+        for(int q=len;q>=0;q--){
+            sb.append(sum[q]);
+        }
+        
+        return sb.toString();
+        
+    }
+}
