@@ -1,0 +1,56 @@
+Given a 2D board and a word, find if the word exists in the grid.
+
+The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+For example,
+Given board =
+
+[
+  ["ABCE"],
+  ["SFCS"],
+  ["ADEE"]
+]
+word = "ABCCED", -> returns true,
+word = "SEE", -> returns true,
+word = "ABCB", -> returns false.
+
+
+public class Solution {
+    public boolean exist(char[][] board, String word) {
+        int row=board.length;
+        int col=board[0].length;
+        if(row==0 || col==0) return false;
+        if(word.length()==0) return true;
+        
+        boolean[][] flag= new boolean[row][col];
+        
+        for(int i=0; i<row; i++){
+          for(int j=0; j<col; j++){
+              if(board[i][j]==word.charAt(0)){
+                  if(dfs(board,word,0,row,col,i,j,flag)) return true;
+              }
+          }
+        }
+        return false;
+    }
+    
+    private boolean dfs(char[][] board, String word, int index, int row, int col, int i, int j, boolean[][] flag){
+        if(index==word.length()) return true; //base
+        if(i<0 || i>=row || j<0 || j>=col || board[i][j]!=word.charAt(index) || flag[i][j]) return false;
+        flag[i][j]=true;
+        
+        //up
+        if(dfs(board,word,index+1,row,col,i+1,j,flag)) return true;
+        //down
+       if(dfs(board,word,index+1,row,col,i-1,j,flag)) return true;
+       //left
+        if(dfs(board,word,index+1,row,col,i,j+1,flag)) return true;
+        //down
+        if(dfs(board,word,index+1,row,col,i,j-1,flag)) return true;
+        
+        flag[i][j]=false;
+        
+        return false;
+    }
+    
+}
